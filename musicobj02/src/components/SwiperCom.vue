@@ -25,43 +25,46 @@ export default{
     data() {
         return {
             swlist:[
-                {
-                    pic: require("../assets/logo.png")
-                },{
-                    pic: require("../assets/logo.png")
-                },{
-                    pic: require("../assets/logo.png")
-                },{
-                    pic: require("../assets/logo.png")
-                },{
-                    pic: require("../assets/logo.png")
-                },{
-                    pic: require("../assets/logo.png")
-                }
+                {pic:require("../../public/img/swiper1.jpg")},
+                {pic:require("../../public/img/swiper1.jpg")},
+                {pic:require("../../public/img/swiper1.jpg")},
+                {pic:require("../../public/img/swiper1.jpg")},
+                {pic:require("../../public/img/swiper1.jpg")},
+                {pic:require("../../public/img/swiper1.jpg")},
+                {pic:require("../../public/img/swiper1.jpg")},
+                {pic:require("../../public/img/swiper1.jpg")},
+                {pic:require("../../public/img/swiper1.jpg")}
             ],
         }
     },
     async mounted() {
         var res = await getBanner(1);
-        console.log(res)
         this.swlist=res.data.banners
-        console.log(this.swlist)
-        var myswiper = new Swiper("#swiperIndex",{
-            loop:true,
-            pagination:{
-                el:".swiper-pagination",
-                clickable:true
-            }
-        })
+    },
 
+    
+
+    watch:{
+        swlist(){
+            console.log("发生变化了")
+            var myswiper = new Swiper("#swiperIndex",{
+                loop:true,
+                pagination:{
+                    el:".swiper-pagination",
+                    clickable:true
+                }
+            })
+        }
     }
+
+    
 }
 </script>
 
 <style lang="less">
-    #swipercom{
+#swipercom{
         width: 7.5rem;
-    #swiperIndex.swiper-container{
+#swiperIndex.swiper-container{
         width: 7.1rem;
         height: 2.6rem;
         border-radius: 0.1rem;
