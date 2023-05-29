@@ -9,16 +9,16 @@
        <div class="mlist">
             <div class="swiper-container" id="musicIndex">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide" v-for="item in musisc">
-                        <img :src="item.picUrl" alt="" srcset="">
-                        <div class="name">{{ item.name }}</div>
-                        <div class="count">
-                            <svg class="icon" aria-hidden="true">
-                                <use xlink:href="#icon-fanjutuijian"></use>
-                            </svg>
-                            <span>{{ changeValue(item.playCount)  }}</span>
-                        </div>
-                    </div>
+                        <router-link :to="{path:'/listview',query:{id:item.id}}" class="swiper-slide" v-for="item in musisc">
+                            <img :src="item.picUrl" alt="" srcset="">
+                                <div class="name">{{ item.name }}</div>
+                                    <div class="count">
+                                    <svg class="icon" aria-hidden="true">
+                                        <use xlink:href="#icon-fanjutuijian"></use>
+                                    </svg>
+                                <span>{{ changeValue(item.playCount)  }}</span>
+                                </div>
+                        </router-link>
                 </div>
             </div>
         </div>
@@ -68,7 +68,7 @@ export default{
         onMounted(async()=>{
             var res = await getgd(9)
             musicls.musisc=res.data.result
-            console.log(musicls.musisc)
+            // console.log(musicls.musisc)
         })
         onUpdated(()=>{
             var myswiper = new Swiper("#musicIndex",{

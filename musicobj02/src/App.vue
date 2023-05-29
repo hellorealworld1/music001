@@ -3,8 +3,23 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
   </nav> -->
-  <router-view/>
+  <div>
+    <router-view/>
+    <playcontroller></playcontroller>
+  </div>
+  
 </template>
+
+
+<script>
+import playcontroller from '@/components/PlayController.vue'
+
+export default{
+  components:{
+    playcontroller
+  }
+}
+</script>
 
 <style lang="less">
 *{

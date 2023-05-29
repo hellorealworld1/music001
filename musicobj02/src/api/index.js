@@ -11,5 +11,8 @@ export function getgd (num) {
 }
 
 
+export function getgdxq (id) {
+    return axios.get(baseUrl + "/playlist/detail?id="+id)
+}
 
 // export default { getBanner }

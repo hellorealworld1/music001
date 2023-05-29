@@ -46,7 +46,6 @@ export default{
 
     watch:{
         swlist(){
-            console.log("发生变化了")
             var myswiper = new Swiper("#swiperIndex",{
                 loop:true,
                 pagination:{
