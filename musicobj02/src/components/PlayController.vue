@@ -10,10 +10,10 @@
             </div>
         </div>
         <div class="right">
-            <svg class="icon" aria-hidden="true" @click="playmusic">
+            <svg v-show="bf" class="icon" aria-hidden="true" @click="playmusic">
                     <use xlink:href="#icon-bofang1"></use>
             </svg>
-            <svg class="icon" aria-hidden="true" @click="ztmusic">
+            <svg v-show="!bf" class="icon" aria-hidden="true" @click="ztmusic">
                     <use xlink:href="#icon-iconstop"></use>
             </svg>
             <svg class="icon" aria-hidden="true">
@@ -31,15 +31,22 @@
 import { mapState } from 'vuex';
 export default{
     name:"playcontroller",
+    data() {
+        return {
+            bf:true
+        }
+    },
     computed:{
         ...mapState(['playlist','playCurrentIndex'])
     },
     methods:{
         playmusic(){
             this.$refs.audio.play();
+            this.bf=false
         },
         ztmusic(){
             this.$refs.audio.pause();
+            this.bf=true
         }
     }
 }
