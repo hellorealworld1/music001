@@ -2,11 +2,11 @@
     <div class="playlist">
         <div class="playlist-top">
             <div class="left">
-                <svg class="icon" aria-hidden="true">
+                <svg class="icon" aria-hidden="true" @click="bfqb">
                     <use xlink:href="#icon-bofang3"></use>
                 </svg>
                 <div class="text">
-                    <div class="title">播放全部</div>
+                    <div class="title" @click="bfqb">播放全部</div>
                     <div class="num">(共10首)</div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="right">
-                    <svg class="icon" aria-hidden="true">
+                    <svg class="icon" aria-hidden="true" @click="setplayIndex(index)">
                         <use xlink:href="#icon-bofang2"></use>
                     </svg>
                     <svg class="icon" aria-hidden="true">
@@ -39,9 +39,18 @@
 </template>
 
 <script>
+import store from '@/store/index';
+import { mapMutations } from 'vuex';
 export default{
     name:'PlayList',
     props:['music'],
+    methods:{
+        bfqb(){
+            //将当前专辑播放列表的数据传到store里
+            store.commit('setPlayList',this.music.tracks)
+        },
+        ...mapMutations(['setplayIndex'])
+    }
 }
 </script>
 

@@ -13,6 +13,16 @@ export default createStore({
           picUrl: "https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
           pic_str: "19061133579343591",
         }
+      }, {
+        name: "断桥残雪", 
+        id: 167937, 
+        al:{
+          id: 16960,
+          name: "断桥残雪",
+          pic: 19061133579343590,
+          picUrl: "https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+          pic_str: "19061133579343591",
+        }
       } 
     ],
     playCurrentIndex:0
@@ -22,6 +32,9 @@ export default createStore({
   mutations: {
     setPlayList(state,value){
       state.playlist = value;
+    },
+    setplayIndex(state,value){
+      state.playCurrentIndex = value;
     }
   },
   actions: {

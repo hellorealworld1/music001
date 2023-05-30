@@ -10,14 +10,15 @@ import { onMounted , reactive} from 'vue';
 import { getgdxq } from '@/api/index'
 import listviewTop from '@/components/listViewTop.vue'
 import playlist from '@/components/playlist.vue'
+import store from '@/store/index';
 export default{
     name:"listview",
     setup() {
         const musicobj = reactive({
             list:[],
             playlist:{
-                creator:{ },
-                tracks:[ ]
+                creator:{ },//歌单详情
+                tracks:[ ]//歌曲列表
             }
         })
         var route = useRoute()

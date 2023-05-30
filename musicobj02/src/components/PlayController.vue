@@ -1,7 +1,7 @@
 <template>
     <div class="playController">
         <div class="left">
-            <img :src="playlist[playCurrentIndex].al.picUrl" alt="">
+            <img @click="xs" :src="playlist[playCurrentIndex].al.picUrl" alt="">
             <div class="content">
                 <div>
                     <div class="title">{{ playlist[playCurrentIndex].name }}</div>
@@ -13,7 +13,7 @@
             <svg v-show="bf" class="icon" aria-hidden="true" @click="playmusic">
                     <use xlink:href="#icon-bofang1"></use>
             </svg>
-            <svg v-show="!bf" class="icon" aria-hidden="true" @click="ztmusic">
+            <svg v-show="!bf" class="icon" aria-hidden="true" @click="playmusic">
                     <use xlink:href="#icon-iconstop"></use>
             </svg>
             <svg class="icon" aria-hidden="true">
@@ -24,29 +24,39 @@
         <!-- 不设置controls -->
         <!-- <audio src="https://music.163.com/song/media/outer/url?id=${playlist[playCurrentIndex].id}.mp3"></audio> -->
         <audio ref="audio" :src="`https://music.163.com/song/media/outer/url?id=${playlist[playCurrentIndex].id}.mp3`"></audio>
+        <playmusic v-show="show" :bf="bf" :show="show" :playmusics="playmusics" :plydetial="playlist[playCurrentIndex]"  @back="show=!show"></playmusic>
     </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import playmusic from './PlayMusic.vue';
 export default{
     name:"playcontroller",
     data() {
         return {
-            bf:true
+            bf:true,
+            show:false
         }
+    },
+    components:{
+        playmusic
     },
     computed:{
         ...mapState(['playlist','playCurrentIndex'])
     },
     methods:{
-        playmusic(){
-            this.$refs.audio.play();
-            this.bf=false
+        playmusics(){
+            if (this.$refs.audio.paused) {
+                this.$refs.audio.play();
+                this.bf=false
+            }else{
+                this.$refs.audio.pause();
+                this.bf=true
+            }
         },
-        ztmusic(){
-            this.$refs.audio.pause();
-            this.bf=true
+        xs(){
+            this.show=!this.show
         }
     }
 }

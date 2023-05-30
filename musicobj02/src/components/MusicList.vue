@@ -8,7 +8,7 @@
        </div>
        <div class="mlist">
             <div class="swiper-container" id="musicIndex">
-                <div class="swiper-wrapper">
+                <div class="swiper-wrapper" style="z-index: 1;">
                         <router-link :to="{path:'/listview',query:{id:item.id}}" class="swiper-slide" v-for="item in musisc">
                             <img :src="item.picUrl" alt="" srcset="">
                                 <div class="name">{{ item.name }}</div>
@@ -29,7 +29,7 @@
 //导入js
 import Swiper from 'swiper'
 //引入css
-import "swiper/css/swiper.min.css"
+import "../../node_modules/swiper/css/swiper.css"
 import {getgd} from '@/api/index'
 import { onMounted,onUpdated , toRefs , reactive } from 'vue';
 export default{

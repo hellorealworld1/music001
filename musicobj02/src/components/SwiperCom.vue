@@ -1,10 +1,10 @@
 <template>
     <div id="swipercom">
         <div class="swiper-container" id="swiperIndex">
-            <div class="swiper-wrapper">
+            <div class="swiper-wrapper" style="z-index: 1;">
                 <div class="swiper-slide" v-for="(item,index) in swlist" :key="index"><img :src="item.pic" :alt="item.title"></div>
             </div>
-            <div class="swiper-pagination">
+            <div class="swiper-pagination" style="z-index: 1;">
 
             </div>
         </div>
@@ -16,7 +16,7 @@
 //导入js
 import Swiper from 'swiper'
 //引入css
-import "swiper/css/swiper.min.css"
+import "swiper/css/swiper.css"
 
 import {getBanner} from '@/api/index'
 
