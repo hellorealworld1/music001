@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import store from '@/store/index'
 
 const routes = [
   {
@@ -23,6 +24,38 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/ListView.vue'),
     props:true
+  },
+  {
+    path: '/search',
+    name: 'search',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/SearchView.vue'),
+  },{
+    path: '/login',
+    name: 'login',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+  },
+  {
+    path: '/me',
+    name: 'me',
+    beforeEnter: (to, from, next) => {
+      // ...
+      if(store.state.islogin == true){
+        next();
+      }else{
+        next('/login')
+      }
+
+    },
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/Me.vue')
   }
 ]
 

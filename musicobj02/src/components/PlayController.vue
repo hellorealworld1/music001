@@ -10,10 +10,10 @@
             </div>
         </div>
         <div class="right">
-            <svg v-show="bf" class="icon" aria-hidden="true" @click="playmusic">
+            <svg v-show="bf" class="icon" aria-hidden="true" @click="playmusics">
                     <use xlink:href="#icon-bofang1"></use>
             </svg>
-            <svg v-show="!bf" class="icon" aria-hidden="true" @click="playmusic">
+            <svg v-show="!bf" class="icon" aria-hidden="true" @click="playmusics">
                     <use xlink:href="#icon-iconstop"></use>
             </svg>
             <svg class="icon" aria-hidden="true">
@@ -24,13 +24,15 @@
         <!-- 不设置controls -->
         <!-- <audio src="https://music.163.com/song/media/outer/url?id=${playlist[playCurrentIndex].id}.mp3"></audio> -->
         <audio ref="audio" :src="`https://music.163.com/song/media/outer/url?id=${playlist[playCurrentIndex].id}.mp3`"></audio>
-        <playmusic v-show="show" :bf="bf" :show="show" :playmusics="playmusics" :plydetial="playlist[playCurrentIndex]"  @back="show=!show"></playmusic>
+        <playmusic v-show="show" @zkf="zdbf" :bf="bf" :show="show" :playmusics="playmusics" :plydetial="playlist[playCurrentIndex]"  @back="show=!show"></playmusic>
     </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
 import playmusic from './PlayMusic.vue';
+import { getlyric } from '@/api/index';
+import store from '@/store/index';
 export default{
     name:"playcontroller",
     data() {
@@ -57,7 +59,36 @@ export default{
         },
         xs(){
             this.show=!this.show
+        },
+        // zdbf(bfzt){
+        //     if (bfzt==false) {
+        //         this.bf=bfzt
+        //         console.log(this.$refs.audio)
+        //         this.$refs.audio.play();
+        //         console.log(this.$refs.audio.paused)
+        //     }else{
+        //         this.bf=bfzt
+        //         this.$refs.audio.pause();
+        //         console.log(this.$refs.audio.paused)
+        //     }
+        // }
+        zdbf(bfzt){
+            if (bfzt==true) {
+                this.$refs.audio.play();
+                this.bf=false
+            }else{
+                this.$refs.audio.pause();
+                this.bf=true
+            }
         }
+    },
+    async updated(){
+        var res = await getlyric(this.playlist[this.playCurrentIndex].id)
+        store.commit('setlyric',res)
+    },
+    async mounted(){
+        var res = await getlyric(this.playlist[this.playCurrentIndex].id)
+        store.commit('setlyric',res)
     }
 }
 </script>

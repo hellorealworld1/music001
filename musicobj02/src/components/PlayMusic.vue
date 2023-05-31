@@ -22,7 +22,7 @@
             <img class="playImg" :src="plydetial.al.picUrl" alt="">
         </div>
         <div  v-show="!isplayLyric"  @click="isplay" class="playLyric">
-            离离原上草，一岁一枯荣，野火烧不尽，春风吹又生
+            {{ lyric }}
         </div>
         <div class="playFooter">
             <svg class="icon" aria-hidden="true" >
@@ -59,7 +59,7 @@ export default{
         }
     },
     computed:{
-        ...mapState(['playCurrentIndex','playlist'])
+        ...mapState(['playCurrentIndex','playlist','lyric'])
     },
     methods:{
         isplay(){
@@ -74,6 +74,8 @@ export default{
                 index=0
             }
             this.setplayIndex(index)
+            this.$emit('zkf',this.bf)
+            
         },
         ...mapMutations(['setplayIndex'])
     }

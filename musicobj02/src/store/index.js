@@ -25,7 +25,9 @@ export default createStore({
         }
       } 
     ],
-    playCurrentIndex:0
+    playCurrentIndex:0,
+    lyric:"hello",
+    islogin:true
   },
   getters: {
   },
@@ -35,6 +37,13 @@ export default createStore({
     },
     setplayIndex(state,value){
       state.playCurrentIndex = value;
+    },
+    setlyric(state,value){
+      state.lyric = value;
+    },
+    addgq(state,value){
+      state.playlist.push(value)
+      state.playCurrentIndex = state.playlist.length-1
     }
   },
   actions: {
